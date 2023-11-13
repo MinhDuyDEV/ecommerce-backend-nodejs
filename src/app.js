@@ -10,6 +10,7 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(compression());
 // init db
+require("./database/init.mongodb");
 
 // init routes
 
