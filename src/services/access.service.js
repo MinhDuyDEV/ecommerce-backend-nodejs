@@ -33,8 +33,8 @@ class AccessService {
       });
       if (newShop) {
         // create privateKey, publicKey
-        const privateKey = crypto.randomBytes(64).toString();
-        const publicKey = crypto.randomBytes(64).toString();
+        const privateKey = crypto.randomBytes(64).toString("hex");
+        const publicKey = crypto.randomBytes(64).toString("hex");
         console.log({ privateKey, publicKey });
         //save collection KeyStore
         const keyStore = await KeyTokenService.createKeyToken({
