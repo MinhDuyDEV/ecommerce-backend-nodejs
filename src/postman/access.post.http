@@ -6,7 +6,7 @@ Content-Type: application/json
 x-api-key: 9028f7f6575fb7185de2f03441314b29aba46f3f83456d2d203b7ee35b9c6ab7fc89f7439ac5d0857d6e5f9323b38e6004de0b9bf93c7762970fc43f3348819c
 
 {
-  "name": "Shop TIPS",
-  "email": "shoptipsjs02@gmail.com",
-  "password": "abc123"
+  "name": "Minh Duy",
+  "email": "minhduy.dev@gmail.com",
+  "password": "#Duy2201"
 }
