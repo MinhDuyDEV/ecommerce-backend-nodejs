@@ -17,6 +17,11 @@ const RoleShop = {
 };
 
 class AccessService {
+  static logout = async (keyStore) => {
+    console.log("🚀 ~ AccessService ~ logout= ~ keyStore:", keyStore);
+    return await KeyTokenService.removeTokenById(keyStore._id);
+  };
+
   static login = async ({ email, password, refreshToken = null }) => {
     const foundShop = await findByEmail({ email });
     if (!foundShop) throw new BadRequestError("Shop not registered!");
@@ -33,6 +38,7 @@ class AccessService {
     await KeyTokenService.createKeyToken({
       userId,
       privateKey,
+      publicKey,
       refreshToken: tokens.refreshToken,
     });
     return {
