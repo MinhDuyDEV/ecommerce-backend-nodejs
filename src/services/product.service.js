@@ -37,18 +37,21 @@ class Product {
     this.product_shop = product_shop;
     this.product_attributes = product_attributes;
   }
-  async createProduct() {
-    return await product.create(this);
+  async createProduct(product_id) {
+    return await product.create({ ...this, _id: product_id });
   }
 }
 
 // define sub-class for different product categories (clothing, electronics, etc.)
 class Clothing extends Product {
   async createProduct() {
-    const newClothing = await clothing.create(this.product_attributes);
+    const newClothing = await clothing.create({
+      ...this.product_attributes,
+      product_shop: this.product_shop,
+    });
     if (!newClothing)
       throw new BadRequestError("Clothing could not be created");
-    const newProduct = await super.createProduct();
+    const newProduct = await super.createProduct(newClothing._id);
     if (!newProduct) throw new BadRequestError("Product could not be created");
     return newProduct;
   }
@@ -56,10 +59,13 @@ class Clothing extends Product {
 
 class Electronics extends Product {
   async createProduct() {
-    const newElectronics = await electronics.create(this.product_attributes);
+    const newElectronics = await electronics.create({
+      ...this.product_attributes,
+      product_shop: this.product_shop,
+    });
     if (!newElectronics)
       throw new BadRequestError("Electronics could not be created");
-    const newProduct = await super.createProduct();
+    const newProduct = await super.createProduct(newElectronics._id);
     if (!newProduct) throw new BadRequestError("Product could not be created");
     return newProduct;
   }
