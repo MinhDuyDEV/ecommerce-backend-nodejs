@@ -54,8 +54,23 @@ const electronicsSchema = new Schema(
   }
 );
 
+// define product category furniture
+const furnitureSchema = new Schema(
+  {
+    brand: { type: String, required: true },
+    size: { type: String, required: true },
+    material: { type: String, required: true },
+    product_shop: { type: Schema.Types.ObjectId, ref: "Shop", required: true },
+  },
+  {
+    timestamps: true,
+    collection: "furniture",
+  }
+);
+
 module.exports = {
   product: model(DOCUMENT_NAME, productSchema),
   clothing: model("Clothing", clothingSchema),
   electronics: model("Electronics", electronicsSchema),
+  furniture: model("Furniture", furnitureSchema),
 };

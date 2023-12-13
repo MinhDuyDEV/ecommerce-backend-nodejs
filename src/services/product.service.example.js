@@ -1,24 +1,18 @@
 "use strict";
 
-const {
-  product,
-  clothing,
-  electronics,
-  furniture,
-} = require("../models/product.model");
+const { product, clothing, electronics } = require("../models/product.model");
 const { BadRequestError } = require("../core/error.response");
 
 class ProductFactory {
-  static productRegistry = {}; // key-class
-
-  static registerProductCategory(category, classRef) {
-    ProductFactory.productRegistry[category] = classRef;
-  }
-
   static async createProduct(category, payload) {
-    const productClass = ProductFactory.productRegistry[category];
-    if (!productClass) throw new BadRequestError("Invalid product category");
-    return new productClass(payload).createProduct();
+    switch (category) {
+      case "Clothing":
+        return await new Clothing(payload).createProduct();
+      case "Electronics":
+        return await new Electronics(payload).createProduct();
+      default:
+        throw new BadRequestError("Invalid product category");
+    }
   }
 }
 
@@ -48,7 +42,7 @@ class Product {
   }
 }
 
-// define sub-class for different product categories (clothing, electronics, furniture, etc.)
+// define sub-class for different product categories (clothing, electronics, etc.)
 class Clothing extends Product {
   async createProduct() {
     const newClothing = await clothing.create({
@@ -76,24 +70,5 @@ class Electronics extends Product {
     return newProduct;
   }
 }
-
-class Furniture extends Product {
-  async createProduct() {
-    const newFurniture = await furniture.create({
-      ...this.product_attributes,
-      product_shop: this.product_shop,
-    });
-    if (!newFurniture)
-      throw new BadRequestError("Furniture could not be created");
-    const newProduct = await super.createProduct(newFurniture._id);
-    if (!product) throw new BadRequestError("Product could not be created");
-    return newProduct;
-  }
-}
-
-// register product categories
-ProductFactory.registerProductCategory("Clothing", Clothing);
-ProductFactory.registerProductCategory("Electronics", Electronics);
-ProductFactory.registerProductCategory("Furniture", Furniture);
 
 module.exports = ProductFactory;
