@@ -12,6 +12,7 @@ const {
   findAllPublishForShop,
   publishProductByShop,
   unPublishProductByShop,
+  searchProducts,
 } = require("../models/repositories/product.repository");
 
 class ProductFactory {
@@ -29,7 +30,7 @@ class ProductFactory {
     return new productClass(payload).createProduct();
   }
 
-  // put
+  // put | patch
   static async publishProductByShop({ product_shop, product_id }) {
     return await publishProductByShop({ product_shop, product_id });
   }
@@ -46,6 +47,9 @@ class ProductFactory {
   static async findAllPublishForShop({ product_shop, limit = 50, skip = 0 }) {
     const query = { product_shop, isPublished: true };
     return await findAllPublishForShop({ query, limit, skip });
+  }
+  static async getListSearchProduct({ keySearch }) {
+    return await searchProducts({ keySearch });
   }
 }
 

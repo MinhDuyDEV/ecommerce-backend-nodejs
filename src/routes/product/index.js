@@ -6,6 +6,12 @@ const asyncHandler = require("../../helpers/asyncHandler");
 const { authenticationV2 } = require("../../auth/authUtils");
 const productController = require("../../controllers/product.controller");
 
+// Search get products
+router.get(
+  "/search/:keySearch",
+  asyncHandler(productController.getListSearchProduct)
+);
+
 // middleware authentication
 router.use(authenticationV2);
 

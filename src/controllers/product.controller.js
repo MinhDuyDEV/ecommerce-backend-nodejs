@@ -84,6 +84,18 @@ class ProductController {
       }),
     }).send(res);
   };
+
+  /**
+   * @description Search products
+   * @param { String } keySearch
+   * @returns { JSON }
+   */
+  getListSearchProduct = async (req, res, next) => {
+    new SuccessResponse({
+      message: "Search products",
+      metadata: await ProductService.getListSearchProduct(req.params),
+    }).send(res);
+  };
 }
 
 module.exports = new ProductController();
