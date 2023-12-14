@@ -18,6 +18,9 @@ const {
   updateProductById,
 } = require("../models/repositories/product.repository");
 const { removeUndefinedData, updateNestedObjectParser } = require("../utils");
+const {
+  insertInventory,
+} = require("../models/repositories/inventory.repository");
 
 class ProductFactory {
   static productRegistry = {}; // key-class
@@ -107,11 +110,17 @@ class Product {
     this.product_attributes = product_attributes;
   }
   async createProduct(product_id) {
-    return await product.create({ ...this, _id: product_id });
+    const newProduct = await product.create({ ...this, _id: product_id });
+    if (newProduct) {
+      await insertInventory({
+        product_id: newProduct._id,
+        shop_id: this.product_shop,
+        quantity: this.product_quantity,
+      });
+    }
+    return newProduct;
   }
   async updateProduct(product_id, body_update) {
-    console.log("🚀 ~ Product ~ updateProduct ~ (product_id:", product_id);
-    console.log("🚀 ~ Product ~ updateProduct ~ body_update:", body_update);
     return await updateProductById({ product_id, body_update, model: product });
   }
 }
