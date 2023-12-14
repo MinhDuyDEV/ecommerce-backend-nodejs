@@ -5,7 +5,6 @@ const { SuccessResponse } = require("../core/success.response");
 const {
   publishProductByShop,
 } = require("../models/repositories/product.repository");
-const reasonPhrases = require("../utils/reasonPhrases");
 
 class ProductController {
   /**
@@ -20,6 +19,27 @@ class ProductController {
         ...req.body,
         product_shop: req.user.userId,
       }),
+    }).send(res);
+  };
+
+  /**
+   * @description Update product
+   * @param { String } product_category
+   * @param { String } product_id
+   * @param { Product } product
+   * @returns { JSON }
+   */
+  updateProduct = async (req, res, next) => {
+    new SuccessResponse({
+      message: "Product updated successfully",
+      metadata: await ProductService.updateProduct(
+        req.body.product_category,
+        req.params.product_id,
+        {
+          ...req.body,
+          product_shop: req.user.userId,
+        }
+      ),
     }).send(res);
   };
 
