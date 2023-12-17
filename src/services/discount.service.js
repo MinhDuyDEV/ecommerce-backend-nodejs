@@ -129,13 +129,6 @@ class DiscountService {
   }
 
   static async getDiscountAmount({ code_id, user_id, shop_id, products }) {
-    console.log(
-      "🚀 ~ DiscountService ~ getDiscountAmount ~ products:",
-      products
-    );
-    console.log("🚀 ~ DiscountService ~ getDiscountAmount ~ code_id:", code_id);
-    console.log("🚀 ~ DiscountService ~ getDiscountAmount ~ user_id:", user_id);
-    console.log("🚀 ~ DiscountService ~ getDiscountAmount ~ shop_id:", shop_id);
     const foundDiscount = await checkDiscountExists({
       model: discount,
       filter: {
