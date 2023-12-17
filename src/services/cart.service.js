@@ -59,7 +59,18 @@ class CartService {
       userCart.cart_products = [product];
       return await userCart.save();
     }
-    return await CartService.updateUserCartQuantity({ user_id, product });
+    if (userCart.cart_products.length) {
+      if (
+        !!userCart.cart_products.find(
+          (item) => item.product_id === product.product_id
+        ) === true
+      ) {
+        return await CartService.updateUserCartQuantity({ user_id, product });
+      } else {
+        userCart.cart_products = [...userCart.cart_products, product];
+        return await userCart.save();
+      }
+    }
   }
 
   // update cart
