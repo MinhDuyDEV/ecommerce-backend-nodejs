@@ -149,6 +149,7 @@ class DiscountService {
       discount_type,
       discount_value,
       discount_max_uses_per_user,
+      discount_product_ids,
     } = foundDiscount;
     if (!discount_is_active) {
       throw new NotFoundError("Discount code has expired");
@@ -162,9 +163,12 @@ class DiscountService {
     ) {
       throw new NotFoundError("Discount code has expired");
     }
+    const listProduct = products.filter((element) =>
+      discount_product_ids.includes(element.product_id)
+    );
     let total_order = 0;
     if (discount_min_order_amount > 0) {
-      total_order = products.reduce((acc, cur) => {
+      total_order = listProduct.reduce((acc, cur) => {
         return acc + cur.product_price * cur.product_quantity;
       }, 0);
     }

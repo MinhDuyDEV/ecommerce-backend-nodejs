@@ -7,13 +7,13 @@ const COLLECTION_NAME = "Inventories";
 
 const inventorySchema = new Schema(
   {
-    inventory_product: {
+    inventory_product_id: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: "Product",
     },
     inventory_location: { type: String, default: "unknown" },
-    inventory_quantity: {
+    inventory_stock: {
       type: Number,
       required: true,
       default: 0,
