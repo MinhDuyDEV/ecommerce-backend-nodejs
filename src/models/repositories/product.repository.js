@@ -1,17 +1,13 @@
 "use strict";
 
-const {
-  product,
-  electronics,
-  clothing,
-  furniture,
-} = require("../../models/product.model");
+const { product } = require("../../models/product.model");
 const { Types } = require("mongoose");
 const {
   getSelectData,
   getUnSelectData,
   convertToObjectIdMongodb,
 } = require("../../utils/index");
+const { NotFoundError } = require("../../core/error.response");
 
 // get all products for shop
 const findAllDraftForShop = async ({ query, limit, skip }) => {
@@ -81,6 +77,13 @@ const findProduct = async ({ product_id, unSelect }) => {
     .lean();
 };
 
+const checkProductExist = async ({ product_id }) => {
+  const foundProduct = await product.exists({
+    _id: convertToObjectIdMongodb(product_id),
+  });
+  if (!foundProduct) throw new NotFoundError("Product not found");
+};
+
 const getProductById = async (product_id) => {
   return await product
     .findOne({ _id: convertToObjectIdMongodb(product_id) })
@@ -135,4 +138,5 @@ module.exports = {
   findProduct,
   updateProductById,
   getProductById,
+  checkProductExist,
 };

@@ -10,5 +10,6 @@ router.use(authenticationV2);
 
 router.get("/", asyncHandler(commentController.getCommentsByParentId));
 router.post("/", asyncHandler(commentController.createComment));
+router.delete("/", asyncHandler(commentController.deleteComment));
 
 module.exports = router;
