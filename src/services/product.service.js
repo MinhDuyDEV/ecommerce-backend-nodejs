@@ -21,6 +21,7 @@ const { removeUndefinedData, updateNestedObjectParser } = require("../utils");
 const {
   insertInventory,
 } = require("../models/repositories/inventory.repository");
+const NotificationService = require("./notification.service");
 
 class ProductFactory {
   static productRegistry = {}; // key-class
@@ -122,6 +123,18 @@ class Product {
         shop_id: this.product_shop,
         quantity: this.product_quantity,
       });
+      // push notification to system
+      NotificationService.pushNotificationToSystem({
+        type: "SHOP-001",
+        receiverId: 1,
+        senderId: this.product_shop,
+        options: {
+          product_name: newProduct.product_name,
+          shop_name: newProduct.product_shop,
+        },
+      })
+        .then((res) => console.log(res))
+        .catch((err) => console.error(err));
     }
     return newProduct;
   }
