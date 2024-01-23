@@ -33,6 +33,22 @@ const searchProducts = async ({ keySearch }) => {
   return results;
 };
 
+const searchProductsInShop = async ({ keySearch, product_shop }) => {
+  const regexSearch = new RegExp(keySearch);
+  const results = await product
+    .find(
+      {
+        product_shop: convertToObjectIdMongodb(product_shop),
+        isDraft: false,
+        $text: { $search: regexSearch },
+      },
+      { score: { $meta: "textScore" } }
+    )
+    .sort({ score: { $meta: "textScore" } })
+    .lean();
+  return results;
+};
+
 const publishProductByShop = async ({ product_shop, product_id }) => {
   const foundShop = await product.findOne({
     product_shop: new Types.ObjectId(product_shop),
@@ -134,6 +150,7 @@ module.exports = {
   findAllPublishForShop,
   unPublishProductByShop,
   searchProducts,
+  searchProductsInShop,
   findAllProducts,
   findProduct,
   updateProductById,

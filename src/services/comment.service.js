@@ -85,6 +85,7 @@ class CommentService {
     limit = 50,
     offset = 0, //skip
   }) {
+    await checkProductExist({ product_id: productId });
     if (parentCommentId) {
       const parent = await Comment.findById(parentCommentId);
       if (!parent) throw new NotFoundError("Not found comment for product");

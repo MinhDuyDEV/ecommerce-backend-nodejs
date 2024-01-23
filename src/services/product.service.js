@@ -16,6 +16,7 @@ const {
   findAllProducts,
   findProduct,
   updateProductById,
+  searchProductsInShop,
 } = require("../models/repositories/product.repository");
 const { removeUndefinedData, updateNestedObjectParser } = require("../utils");
 const {
@@ -69,6 +70,10 @@ class ProductFactory {
     return await searchProducts({ keySearch });
   }
 
+  static async getListProductInShop({ product_shop, keySearch }) {
+    return await searchProductsInShop({ product_shop, keySearch });
+  }
+
   static async findAllProducts({
     limit = 50,
     sort = "ctime",
@@ -91,6 +96,10 @@ class ProductFactory {
 
   static async findProduct({ product_id }) {
     return await findProduct({ product_id, unSelect: ["__v"] });
+  }
+
+  async getListCategory() {
+    return await product.find({}).distinct("product_category");
   }
 }
 
