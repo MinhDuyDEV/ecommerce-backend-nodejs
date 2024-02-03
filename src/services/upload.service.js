@@ -1,6 +1,8 @@
 "use strict";
 
 const cloudinary = require("../configs/cloudinary.config");
+const { s3, PutObjectCommand } = require("../configs/s3.config");
+const crypto = require("crypto");
 
 class UploadService {
   static async uploadImageFromUrl() {
@@ -34,6 +36,27 @@ class UploadService {
           format: "jpg",
         }),
       };
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  }
+
+  // Upload file to S3
+  static async uploadImageFromLocalS3({ file }) {
+    try {
+      const randomImageName = crypto.randomBytes(16).toString("hex");
+      const command = new PutObjectCommand({
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: randomImageName,
+        Body: file.buffer,
+        ContentType: "image/jpeg",
+      });
+      const result = await s3.send(command);
+      console.log(
+        "🚀 ~ UploadService ~ uploadImageFromLocalS3 ~ result:",
+        result
+      );
+      return result;
     } catch (error) {
       console.log("Error: ", error);
     }

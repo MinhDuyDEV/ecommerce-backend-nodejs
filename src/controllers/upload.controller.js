@@ -22,6 +22,17 @@ class UploadController {
       }),
     }).send(res);
   };
+
+  uploadImageFromLocalS3 = async (req, res, next) => {
+    const { file } = req;
+    if (!file) throw new BadRequestError("File is required!");
+    new SuccessResponse({
+      message: "Upload image from local S3 successfully!",
+      metadata: await UploadService.uploadImageFromLocalS3({
+        file,
+      }),
+    }).send(res);
+  };
 }
 
 module.exports = new UploadController();
