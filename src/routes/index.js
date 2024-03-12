@@ -14,6 +14,13 @@ router.use(apiKey);
 // check permission
 router.use(permission("0000"));
 
+router.use("/api/test", (req, res) => {
+  res.json({
+    status: "success",
+    message: "Welcome to API",
+  });
+});
+
 router.use("/v1/api/auth", require("./access"));
 router.use("/v1/api/product", require("./product"));
 router.use("/v1/api/discount", require("./discount"));
