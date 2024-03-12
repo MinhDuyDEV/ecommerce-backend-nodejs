@@ -10,6 +10,8 @@ const {
 const crypto = require("crypto");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
+const urlImagePublic = "https://da99wgna6fk88.cloudfront.net";
+
 class UploadService {
   static async uploadImageFromUrl() {
     try {
@@ -59,18 +61,16 @@ class UploadService {
       });
       // export url
       const result = await s3.send(command);
-      console.log(
-        "🚀 ~ UploadService ~ uploadImageFromLocalS3 ~ result:",
-        result
-      );
       const singedUrl = new GetObjectCommand({
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: randomImageName,
       });
       console.log("singedUrl", singedUrl);
       const url = await getSignedUrl(s3, singedUrl, { expiresIn: 3600 });
-      console.log("🚀 ~ UploadService ~ uploadImageFromLocalS3 ~ url:", url);
-      return url;
+      return {
+        url: `${urlImagePublic}/${randomImageName}`,
+        result,
+      };
     } catch (error) {
       console.log("Error: ", error);
     }
