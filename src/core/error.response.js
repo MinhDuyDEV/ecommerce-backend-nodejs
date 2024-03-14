@@ -1,11 +1,18 @@
 "use strict";
 
 const { StatusCodes, ReasonPhrases } = require("../utils/httpStatusCode");
+const myLogger = require("../loggers/mylogger.log");
 
 class ErrorResponse extends Error {
   constructor(message, status) {
     super(message);
     this.status = status;
+    this.now = Date.now();
+    // myLogger.error(this.message, [
+    //   "/api/v1/login",
+    //   "v33452343",
+    //   { error: "BadRequestError" },
+    // ]);
   }
 }
 

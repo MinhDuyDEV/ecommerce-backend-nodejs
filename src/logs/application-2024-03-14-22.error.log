@@ -1,0 +1,1 @@
+2024-03-14 22:14:43::error::/v1/api/auth/shop/login::0ddbf98d-67a5-434c-898e-992cf552eb4f::400 - 1ms - Response: {"status":400,"now":1710429283299}::{"message":"Email or password is missing!"}

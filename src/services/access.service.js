@@ -94,6 +94,8 @@ class AccessService {
   };
 
   static login = async ({ email, password, refreshToken = null }) => {
+    if (!email || !password)
+      throw new BadRequestError("Email or password is missing!");
     const foundShop = await findByEmail({ email });
     if (!foundShop) throw new BadRequestError("Shop not registered!");
     const match = await bcrypt.compare(password, foundShop.password);

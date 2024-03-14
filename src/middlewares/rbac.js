@@ -9,8 +9,6 @@ const rbac = require("./role.middleware");
  * @param {*} resource profile, product, discount, cart, inventory, comment, notification, upload
  */
 const grantAccess = (action, resource) => {
-  console.log("🚀 ~ grantAccess ~ action:", action);
-  console.log("🚀 ~ grantAccess ~ resource:", resource);
   return async (req, res, next) => {
     try {
       rbac.setGrants(await roleList({ userId: 9999 }));
