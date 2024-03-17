@@ -1,16 +1,20 @@
 "use strict";
 
-const redis = require("redis");
+// const redis = require("redis");
 const { promisify } = require("util");
 const { reservationInventory } = require("../services/inventory.service");
-const redisClient = redis.createClient();
+const client = require("../database/init.redis");
+// const redisClient = redis.createClient();
 
-async function connectRedis() {
-  redisClient.on("error", (err) => console.log("Redis Client Error", err));
-  redisClient.on("connect", () => console.log("Connected to Redis"));
-  await redisClient.connect();
-}
-connectRedis();
+// async function connectRedis() {
+//   redisClient.on("error", (err) => console.log("Redis Client Error", err));
+//   redisClient.on("connect", () => console.log("Connected to Redis"));
+//   await redisClient.connect();
+// }
+// connectRedis();
+
+const { instanceConnect: redisClient } = client.getRedis();
+
 const pExpire = promisify(redisClient.pExpire).bind(redisClient);
 const setNXAsync = promisify(redisClient.setNX).bind(redisClient);
 
