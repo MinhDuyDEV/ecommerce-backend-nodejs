@@ -6,49 +6,9 @@
     "auditLog": "src\\logs\\.d2a10da7cd082ea950845e5194bfc6a34433877f-audit.json",
     "files": [
         {
-            "date": 1710428839980,
-            "name": "src\\logs\\application-2024-03-14-22.error.log",
-            "hash": "ef97fffedba4d91f5ca14221555bdd483c97f5248b1b3e1ac3d8a43e04df6b26"
-        },
-        {
-            "date": 1710474658516,
-            "name": "src\\logs\\application-2024-03-15-10.error.log",
-            "hash": "7c64474472685a8fc2d9b9a48f10bce318907d296e2f474dc6a7a01aff94791f"
-        },
-        {
-            "date": 1710475217615,
-            "name": "src\\logs\\application-2024-03-15-11.error.log",
-            "hash": "25a657e2cd032d38b445c0526a56a8516231c4525ac2c7fdae405e1f657f4bd8"
-        },
-        {
-            "date": 1710478826101,
-            "name": "src\\logs\\application-2024-03-15-12.error.log",
-            "hash": "0e628669daf5623bd01d9f0dc3fc8cd31760c6674cf6984ebea83d7e542b30a5"
-        },
-        {
-            "date": 1710484520877,
-            "name": "src\\logs\\application-2024-03-15-13.error.log",
-            "hash": "2f6f570f9248fc92e30d0541405fa309118f1deb5e75bc94a38e7378a4a1c277"
-        },
-        {
-            "date": 1710486042953,
-            "name": "src\\logs\\application-2024-03-15-14.error.log",
-            "hash": "3539b3d1f159ba0d2e43b2f592361c06a18a1d888d7bfcad0b8f48a2149f7dd9"
-        },
-        {
-            "date": 1710489965135,
-            "name": "src\\logs\\application-2024-03-15-15.error.log",
-            "hash": "9cc16c0947429b582a21b0d263a032b5bdc2737c731c88cdef236c4721fb85ac"
-        },
-        {
-            "date": 1710603344403,
-            "name": "src\\logs\\application-2024-03-16-22.error.log",
-            "hash": "896b1b03c73713eb40305ff651290b2816ad86c3e05b64eff9d1310b35c42a02"
-        },
-        {
-            "date": 1710608091754,
-            "name": "src\\logs\\application-2024-03-16-23.error.log",
-            "hash": "beaf073ae7f659a7d34ccc9fc4da155bfc8e54cfae3129ee583118bca488fc33"
+            "date": 1715611894732,
+            "name": "src\\logs\\application-2024-05-13-21.error.log",
+            "hash": "0d4bad3f547d615bf6f1326bdebc9bc3efd47c6cb6a4edc7043ffe15ed07a5eb"
         }
     ],
     "hashType": "sha256"
